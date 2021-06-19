@@ -25,9 +25,9 @@ final class Player: PlayerBaseCompatible {
     }
 
     func checkIfCanTossWhenTossing(table: [Card: Card]) -> Bool {
-        for (top, bottom) in table {
+        for (top, _) in table {
             for card in hand! {
-                if card.value == top.value || card.value == bottom.value {
+                if card.value == top.value {
                     return true
                 }
             }
