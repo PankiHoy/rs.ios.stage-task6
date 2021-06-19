@@ -16,8 +16,24 @@ struct Game: GameCompatible {
 }
 
 extension Game {
-
+    
     func defineFirstAttackingPlayer(players: [Player]) -> Player? {
-        nil
+        if players.count == 0 && players.allSatisfy( { $0.hand?.count == 6 } ){
+            return nil
+        }
+        
+        var firstPlayer = players.last
+        var lowestTrump = players.last?.hand?.last
+        
+        for player in players {
+            for card in player.hand! {
+                if card.isTrump && card.checkIfCanBeat(card: lowestTrump!){
+                    lowestTrump = card
+                    firstPlayer = player
+                }
+            }
+        }
+        
+        return firstPlayer
     }
 }
